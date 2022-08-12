@@ -1,3 +1,4 @@
+import javax.swing.text.html.Option;
 import java.util.*;
 import java.util.function.Function;
 import java.util.stream.Collectors;
@@ -12,8 +13,9 @@ public class main{
         emp.add(new Employee("Indumini", "Hettiarachchi", 27, "FEMALE","ASE",2200));
         emp.add(new Employee("Himanshi", "Dias", 30, "FEMALE","SSE",6000));
         emp.add(new Employee("Kasuni", "Harshi", 26, "FEMALE","JHR",2500));
-        emp.add(new Employee("Iresha", "Sandi", 28, "FEMALE","JHR",2500));
+        emp.add(new Employee("Iresha", "Sandi", 28, "FEMALE","JHR",2700));
         emp.add(new Employee("Alexa", "Vo", 30, "MALE","HR",5000));
+        emp.add(new Employee("Samantha", "Hima", 35, "MALE","HR",9000));
 
         //emp.stream().map(Employee::getJob).distinct().forEach(System.out::println);
 
@@ -56,11 +58,18 @@ public class main{
                 .map(e->e.getKey())
                 .collect(Collectors.toSet());
 
-        System.out.println(res7);
+        //System.out.println(res7);
 
+    List<Integer> numbers = Arrays.asList(11,22,33,12,13,15,23,45,67,87,66,54,32,22);
+    //numbers.stream().map(m->m.toString()).filter(s->s.startsWith("1")).forEach(System.out::println);
 
-
-
+        emp.stream()
+                .collect(Collectors.groupingBy(Employee::getJob, Collectors.collectingAndThen(Collectors.maxBy(Comparator.comparingInt(Employee::getSalary)), Optional::get)))
+                .entrySet()
+                .stream()
+                .forEach(e->{
+                    System.out.println(e.getKey()+" => "+e.getValue().getSalary());
+                });
 
     }
 }
