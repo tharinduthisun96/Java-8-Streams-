@@ -71,5 +71,18 @@ public class main{
                     System.out.println(e.getKey()+" => "+e.getValue().getSalary());
                 });
 
+        Map<String, Integer> map = new HashMap<>();
+        map.put("Two",2);
+        map.put("One",1);
+        map.put("Six",6);
+        map.put("Five",5);
+        map.put("Three",3);
+        map.put("Four",4);
+
+        LinkedHashMap<String, Integer> res9 = map.entrySet()
+                .stream()
+                .sorted((s1,s2)->s1.getValue()-s2.getValue())//Comparator.comparingInt(Map.Entry::getValue
+                .collect(Collectors.toMap(Map.Entry::getKey,Map.Entry::getValue,(e1,e2)->e1, LinkedHashMap::new));
+        //System.out.println(res9);
     }
 }
